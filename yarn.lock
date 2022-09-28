@@ -3659,10 +3659,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.4.0.tgz#23e995af1543e38022e4b7e19164cf654c6da720"
   integrity sha512-YMJ1PWVfnLbQ9GPqPb9yniHKH0XKQgcjYNJuWyw47OWn9tTvvG16Muq3B6aTjKj3ce6cl1imBHoDUIbvK8PqXQ==
 
-"@tanstack/react-query-devtools@^4.3.9":
-  version "4.3.9"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.3.9.tgz#3897d30f49b1b86f473fe4dbac8f634fc33b6e80"
-  integrity sha512-N+nMBwrxAYsC5oEmexCuo4OZqBpR97pfy8r8tuvekFNYlA0pYlCnsxiqkZoZzF6ewk7w8KPkkDhClx0kSlW3qw==
+"@tanstack/react-query-devtools@^4.7.2":
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.7.2.tgz#954bb315f05801e8591d7cda4527fb3f4e9a87e9"
+  integrity sha512-Dia8EaesGvZeWVFsDnSd98cbNi16+s74glAjrjFigtvUNQKziBqYKMzBpFwFMNfMJbaZlx4b4V5DeJh7hkKfvA==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.1.1"
     use-sync-external-store "^1.2.0"
