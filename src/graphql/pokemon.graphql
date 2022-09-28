@@ -1,0 +1,17 @@
+fragment Text on pokemon_v2_pokemonspeciesflavortext {
+  flavor_text
+}
+
+query PokemonDetail {
+  pokemon: pokemon_v2_pokemon {
+    id
+    name
+    specy: pokemon_v2_pokemonspecy {
+      id
+      text: pokemon_v2_pokemonspeciesflavortexts {
+        id
+        ...Text
+      }
+    }
+  }
+}

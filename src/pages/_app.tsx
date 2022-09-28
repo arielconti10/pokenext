@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { ChakraProvider } from '@chakra-ui/provider'
 
@@ -9,6 +11,16 @@ import { DefaultSeo } from 'next-seo'
 import SEO from '../../next-seo.config'
 
 import { defaultTheme } from 'theme'
+import { GraphQLClientProvider } from '../providers/GraphQLClientProvider'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+      retry: 0,
+    },
+  },
+})
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -32,9 +44,14 @@ const App = ({ Component, pageProps }: AppProps) => {
         options={{ showSpinner: false }}
       />
 
-      <ChakraProvider theme={defaultTheme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <GraphQLClientProvider>
+          <ChakraProvider theme={defaultTheme}>
+            <Component {...pageProps} />
+          </ChakraProvider>
+        </GraphQLClientProvider>
+      </QueryClientProvider>
     </>
   )
 }

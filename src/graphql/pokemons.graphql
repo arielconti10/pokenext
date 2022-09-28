@@ -1,0 +1,16 @@
+fragment PokemonsF on pokemon_v2_pokemon {
+  id
+  name
+}
+
+query Pokemons($offset: Int! = 0, $limit: Int!) {
+  pokemons: pokemon_v2_pokemon(limit: $limit, offset: $offset) {
+    ...PokemonsF
+  }
+}
+
+query AllPokemons {
+  pokemons: pokemon_v2_pokemon {
+    ...PokemonsF
+  }
+}

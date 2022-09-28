@@ -10,6 +10,23 @@
       "version": "detect"
     }
   },
+  "overrides": [
+    {
+      "files": "src/**/*.graphql",
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "parserOptions": {
+        "operations": ["src/**/*.graphql"]
+      }
+    },
+    {
+      "files": ["*.graphql"],
+      "extends": "plugin:@graphql-eslint/operations-recommended",
+      "rules": {
+        // Override graphql-eslint rules for operations files
+      }
+    }
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -26,12 +43,13 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "@graphql-eslint"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@graphql-eslint/known-type-names": "error"
   }
 }

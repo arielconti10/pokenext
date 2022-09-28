@@ -1,0 +1,11 @@
+schema: 'https://beta.pokeapi.co/graphql/v1beta'
+documents: 'src/**/graphql/**/*.graphql'
+generates:
+  src/shared/ts/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+    config:
+      fetcher: graphql-request
+      omitOperationSuffix: true
