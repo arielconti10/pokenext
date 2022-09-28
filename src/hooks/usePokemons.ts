@@ -4,7 +4,7 @@ import { useQueryStatusLogging } from './useQueryStatusLogging'
 
 export function usePokemons() {
   const { graphQLClient } = useGraphQLClient()
-  const pageSize = 20
+  const pageSize = 18
 
   const queryInfo = useInfinitePokemonsQuery(
     'offset',

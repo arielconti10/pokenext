@@ -45,12 +45,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       />
 
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
         <GraphQLClientProvider>
           <ChakraProvider theme={defaultTheme}>
             <Component {...pageProps} />
           </ChakraProvider>
         </GraphQLClientProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   )
