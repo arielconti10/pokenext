@@ -1,4 +1,4 @@
-import { useInfinitePokemonsQuery, PokemonsFragment } from 'services/graphql'
+import { useInfinitePokemons, PokemonsF } from 'services/graphql'
 import { useGraphQLClient } from '../providers/hooks/useGraphQLClient'
 import { useQueryStatusLogging } from './useQueryStatusLogging'
 
@@ -6,7 +6,7 @@ export function usePokemons() {
   const { graphQLClient } = useGraphQLClient()
   const pageSize = 18
 
-  const queryInfo = useInfinitePokemonsQuery(
+  const queryInfo = useInfinitePokemons(
     'offset',
     graphQLClient,
     {
@@ -29,8 +29,8 @@ export function usePokemons() {
 
   useQueryStatusLogging(queryInfo, 'pokemons')
 
-  const pokemons = queryInfo.data?.pages.reduce<Array<PokemonsFragment>>(
-    (prev: Array<PokemonsFragment>, curr) => {
+  const pokemons = queryInfo.data?.pages.reduce<Array<PokemonsF>>(
+    (prev: Array<PokemonsF>, curr) => {
       return [...prev, ...curr.pokemons]
     },
     [],

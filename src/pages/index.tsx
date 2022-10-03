@@ -1,4 +1,5 @@
 import { NextSeo } from 'next-seo'
+
 import { DefaultLayout } from 'layouts/default'
 import { Flex } from 'components/layout'
 import HomeLayout from 'layouts/Home'

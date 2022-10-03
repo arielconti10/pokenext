@@ -50771,13 +50771,7 @@ export type Subscription_RootPokemon_V2_Versionname_By_PkArgs = {
   id: Scalars['Int']
 }
 
-export type PokemonSpecieFragment = {
-  __typename?: 'pokemon_v2_pokemonspecies'
-  id: number
-  name: string
-}
-
-export type TextFragment = {
+export type Text = {
   __typename?: 'pokemon_v2_pokemonspeciesflavortext'
   flavor_text: string
 }
@@ -50792,75 +50786,88 @@ export type PokemonDetail = {
     name: string
     specy?: {
       __typename?: 'pokemon_v2_pokemonspecies'
+      id: number
       text: Array<{
         __typename?: 'pokemon_v2_pokemonspeciesflavortext'
+        id: number
         flavor_text: string
       }>
     } | null
   }>
 }
 
-export type PokemonsFragment = {
+export type PokemonsF = {
   __typename?: 'pokemon_v2_pokemon'
   id: number
   name: string
+  pokemon_v2_pokemonsprites: Array<{
+    __typename?: 'pokemon_v2_pokemonsprites'
+    sprites: string
+  }>
 }
 
-export type PokemonsQueryVariables = Exact<{
+export type PokemonsVariables = Exact<{
   offset?: Scalars['Int']
   limit: Scalars['Int']
 }>
 
-export type PokemonsQuery = {
+export type Pokemons = {
   __typename?: 'query_root'
   pokemons: Array<{
     __typename?: 'pokemon_v2_pokemon'
     id: number
     name: string
+    pokemon_v2_pokemonsprites: Array<{
+      __typename?: 'pokemon_v2_pokemonsprites'
+      sprites: string
+    }>
   }>
 }
 
-export type AllPokemonsQUeryVariables = Exact<{ [key: string]: never }>
+export type AllPokemonsVariables = Exact<{ [key: string]: never }>
 
-export type AllPokemonsQUery = {
+export type AllPokemons = {
   __typename?: 'query_root'
   pokemons: Array<{
     __typename?: 'pokemon_v2_pokemon'
     id: number
     name: string
+    pokemon_v2_pokemonsprites: Array<{
+      __typename?: 'pokemon_v2_pokemonsprites'
+      sprites: string
+    }>
   }>
 }
 
-export const PokemonSpecieFragment = `
-    fragment pokemonSpecieFragment on pokemon_v2_pokemonspecies {
-  id
-  name
-}
-    `
-export const TextFragment = `
-    fragment textFragment on pokemon_v2_pokemonspeciesflavortext {
+export const Text = `
+    fragment Text on pokemon_v2_pokemonspeciesflavortext {
   flavor_text
 }
     `
-export const PokemonsFragment = `
-    fragment pokemonsFragment on pokemon_v2_pokemon {
+export const PokemonsF = `
+    fragment PokemonsF on pokemon_v2_pokemon {
   id
   name
+  pokemon_v2_pokemonsprites {
+    sprites
+  }
 }
     `
 export const PokemonDetailDocument = `
-    query pokemonDetail {
+    query PokemonDetail {
   pokemon: pokemon_v2_pokemon {
     id
     name
     specy: pokemon_v2_pokemonspecy {
+      id
       text: pokemon_v2_pokemonspeciesflavortexts {
-        ...textFragment
+        id
+        ...Text
       }
     }
   }
 }
-    ${TextFragment}`
+    ${Text}`
 export const usePokemonDetail = <TData = PokemonDetail, TError = unknown>(
   client: GraphQLClient,
   variables?: PokemonDetailVariables,
@@ -50868,7 +50875,7 @@ export const usePokemonDetail = <TData = PokemonDetail, TError = unknown>(
   headers?: RequestInit['headers'],
 ) =>
   useQuery<PokemonDetail, TError, TData>(
-    variables === undefined ? ['pokemonDetail'] : ['pokemonDetail', variables],
+    variables === undefined ? ['PokemonDetail'] : ['PokemonDetail', variables],
     fetcher<PokemonDetail, PokemonDetailVariables>(
       client,
       PokemonDetailDocument,
@@ -50889,8 +50896,8 @@ export const useInfinitePokemonDetail = <
 ) =>
   useInfiniteQuery<PokemonDetail, TError, TData>(
     variables === undefined
-      ? ['pokemonDetail.infinite']
-      : ['pokemonDetail.infinite', variables],
+      ? ['PokemonDetail.infinite']
+      : ['PokemonDetail.infinite', variables],
     (metaData) =>
       fetcher<PokemonDetail, PokemonDetailVariables>(
         client,
@@ -50901,94 +50908,86 @@ export const useInfinitePokemonDetail = <
     options,
   )
 
-export const PokemonsQueryDocument = `
-    query pokemonsQuery($offset: Int! = 0, $limit: Int!) {
+export const PokemonsDocument = `
+    query Pokemons($offset: Int! = 0, $limit: Int!) {
   pokemons: pokemon_v2_pokemon(limit: $limit, offset: $offset) {
-    ...pokemonsFragment
+    ...PokemonsF
   }
 }
-    ${PokemonsFragment}`
-export const usePokemonsQuery = <TData = PokemonsQuery, TError = unknown>(
+    ${PokemonsF}`
+export const usePokemons = <TData = Pokemons, TError = unknown>(
   client: GraphQLClient,
-  variables: PokemonsQueryVariables,
-  options?: UseQueryOptions<PokemonsQuery, TError, TData>,
+  variables: PokemonsVariables,
+  options?: UseQueryOptions<Pokemons, TError, TData>,
   headers?: RequestInit['headers'],
 ) =>
-  useQuery<PokemonsQuery, TError, TData>(
-    ['pokemonsQuery', variables],
-    fetcher<PokemonsQuery, PokemonsQueryVariables>(
+  useQuery<Pokemons, TError, TData>(
+    ['Pokemons', variables],
+    fetcher<Pokemons, PokemonsVariables>(
       client,
-      PokemonsQueryDocument,
+      PokemonsDocument,
       variables,
       headers,
     ),
     options,
   )
-export const useInfinitePokemonsQuery = <
-  TData = PokemonsQuery,
-  TError = unknown,
->(
-  _pageParamKey: keyof PokemonsQueryVariables,
+export const useInfinitePokemons = <TData = Pokemons, TError = unknown>(
+  _pageParamKey: keyof PokemonsVariables,
   client: GraphQLClient,
-  variables: PokemonsQueryVariables,
-  options?: UseInfiniteQueryOptions<PokemonsQuery, TError, TData>,
+  variables: PokemonsVariables,
+  options?: UseInfiniteQueryOptions<Pokemons, TError, TData>,
   headers?: RequestInit['headers'],
 ) =>
-  useInfiniteQuery<PokemonsQuery, TError, TData>(
-    ['pokemonsQuery.infinite', variables],
+  useInfiniteQuery<Pokemons, TError, TData>(
+    ['Pokemons.infinite', variables],
     (metaData) =>
-      fetcher<PokemonsQuery, PokemonsQueryVariables>(
+      fetcher<Pokemons, PokemonsVariables>(
         client,
-        PokemonsQueryDocument,
+        PokemonsDocument,
         { ...variables, ...(metaData.pageParam ?? {}) },
         headers,
       )(),
     options,
   )
 
-export const AllPokemonsQUeryDocument = `
-    query allPokemonsQUery {
+export const AllPokemonsDocument = `
+    query AllPokemons {
   pokemons: pokemon_v2_pokemon {
-    ...pokemonsFragment
+    ...PokemonsF
   }
 }
-    ${PokemonsFragment}`
-export const useAllPokemonsQUery = <TData = AllPokemonsQUery, TError = unknown>(
+    ${PokemonsF}`
+export const useAllPokemons = <TData = AllPokemons, TError = unknown>(
   client: GraphQLClient,
-  variables?: AllPokemonsQUeryVariables,
-  options?: UseQueryOptions<AllPokemonsQUery, TError, TData>,
+  variables?: AllPokemonsVariables,
+  options?: UseQueryOptions<AllPokemons, TError, TData>,
   headers?: RequestInit['headers'],
 ) =>
-  useQuery<AllPokemonsQUery, TError, TData>(
-    variables === undefined
-      ? ['allPokemonsQUery']
-      : ['allPokemonsQUery', variables],
-    fetcher<AllPokemonsQUery, AllPokemonsQUeryVariables>(
+  useQuery<AllPokemons, TError, TData>(
+    variables === undefined ? ['AllPokemons'] : ['AllPokemons', variables],
+    fetcher<AllPokemons, AllPokemonsVariables>(
       client,
-      AllPokemonsQUeryDocument,
+      AllPokemonsDocument,
       variables,
       headers,
     ),
     options,
   )
-export const useInfiniteAllPokemonsQUery = <
-  TData = AllPokemonsQUery,
-  TError = unknown,
->(
-  _pageParamKey: keyof AllPokemonsQUeryVariables,
+export const useInfiniteAllPokemons = <TData = AllPokemons, TError = unknown>(
+  _pageParamKey: keyof AllPokemonsVariables,
   client: GraphQLClient,
-  variables?: AllPokemonsQUeryVariables,
-  options?: UseInfiniteQueryOptions<AllPokemonsQUery, TError, TData>,
+  variables?: AllPokemonsVariables,
+  options?: UseInfiniteQueryOptions<AllPokemons, TError, TData>,
   headers?: RequestInit['headers'],
 ) =>
-  useInfiniteQuery<AllPokemonsQUery, TError, TData>(
+  useInfiniteQuery<AllPokemons, TError, TData>(
     variables === undefined
-      ? ['allPokemonsQUery.infinite']
-      : ['allPokemonsQUery.infinite', variables],
+      ? ['AllPokemons.infinite']
+      : ['AllPokemons.infinite', variables],
     (metaData) =>
-      fetcher<AllPokemonsQUery, AllPokemonsQUeryVariables>(
+      fetcher<AllPokemons, AllPokemonsVariables>(
         client,
-        AllPokemonsQUeryDocument,
+        AllPokemonsDocument,
         { ...variables, ...(metaData.pageParam ?? {}) },
         headers,
       )(),
